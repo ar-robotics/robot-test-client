@@ -5,7 +5,7 @@ import json
 
 from .utils import get_config
 
-# import brotli
+import brotli
 
 
 class Client:
@@ -27,9 +27,11 @@ class Client:
     def receive(self) -> None:
         data = self.client_socket.recv(self.packet_size)
 
-        # check if "bro" is first byte, then decompress with brotli
+        # "bro" indicates brotli compressed
+        if data[:3] == b"bro":
+            data = brotli.decompress(data[3:])
 
-        print(f"<- RECV {data[:50]}")
+        print(f"<- RECV {data[:100]}")
 
     def receive_messages(self) -> None:
         while True:

@@ -12,3 +12,8 @@ Client for testing commands on the robot. Client mocks as a VR headset TCP socke
 {"mode": 1}
 ```
 
+### Switch to IDLE mode
+```json
+{"mode": 0}
+```
+
